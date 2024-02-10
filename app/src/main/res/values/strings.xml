@@ -3,5 +3,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_page_title">Все заметки</string>
-
+    <string name="homepage_menu_item_search">Поиск</string>
+    <string name="content_description_search">Поиск по названию</string>
+    <string name="homepage_menu_item_bin">Корзина</string>
+    <string name="content_description_bin">Корзина с удалёнными заметками</string>
+    <string name="drawer_header_title">Группы заметок</string>
+    <string name="drawer_header_text">Поиск по группе заметок</string>
+    <string name="default_groups_title">Группы по умолчанию</string>
+    <string name="all_title">Все заметки</string>
+    <string name="favorite_title">Избранные</string>
+    <string name="no_group_title">Без группы</string>
+    <string name="homepage_menu_item_create">Создать</string>
+    <string name="content_description_create">Создать новую заметку</string>
+    <string name="user_groups_title">Пользовательские группы</string>
+    <string name="edit_group_title">Управление группами</string>
 </resources>

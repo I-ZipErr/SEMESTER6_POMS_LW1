@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/default_item"
+        android:title="@string/default_groups_title">
+        <menu>
+            <item
+                android:id="@+id/all_item"
+                android:title="@string/all_title"
+                android:icon="@drawable/ic_notebook"
+                android:checkable="true"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/favorite_item"
+                android:title="@string/favorite_title"
+                android:icon="@drawable/ic_favorite"
+                android:checkable="true"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/no_group_item"
+                android:title="@string/no_group_title"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_no_group"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/user_item"
+        android:title="@string/user_groups_title">
+        <menu>
+            <item
+                android:id="@+id/edit_group_item"
+                android:title="@string/edit_group_title"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_edit"/>
+        </menu>
+    </item>
+</menu>
