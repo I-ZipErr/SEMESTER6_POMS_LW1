@@ -17,4 +17,12 @@
     <string name="content_description_create">Создать новую заметку</string>
     <string name="user_groups_title">Пользовательские группы</string>
     <string name="edit_group_title">Управление группами</string>
+    <string name="favorite_note">Добавить в избранные</string>
+    <string name="delete_favorite_note">Удалить из избранных</string>
+    <string name="delete_note">Удалить заметку</string>
+    <string name="delete_note_description">Переместить заметку в корзину</string>
+    <string name="edit_note">Изменить группу</string>
+    <string name="edit_note_description">Изменить группу заметки</string>
+    <string name="note_text_hint">Начните писать здесь!</string>
+    <string name="note_name_hint">Безымянная заметка</string>
 </resources>

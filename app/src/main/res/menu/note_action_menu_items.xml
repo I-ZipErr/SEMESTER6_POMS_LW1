@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favorite"
+        android:title="@string/favorite_note"
+        android:icon="@drawable/ic_favorite"
+        android:contentDescription="@string/favorite_note"
+        app:showAsAction="always"
+        android:visible="false"/> <!-- Changing in code -->
+    <item
+        android:id="@+id/delete_favorite"
+        android:title="@string/delete_favorite_note"
+        android:icon="@drawable/ic_not_favorite"
+        android:contentDescription="@string/delete_favorite_note"
+        app:showAsAction="always"
+        android:visible="false"/>
+    <item
+        android:id="@+id/edit"
+        android:title="@string/edit_note"
+        android:icon="@drawable/ic_edit"
+        android:contentDescription="@string/edit_note_description"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete_note"
+        android:icon="@drawable/ic_bin"
+        android:contentDescription="@string/delete_note_description"
+        app:showAsAction="always" />
+</menu>

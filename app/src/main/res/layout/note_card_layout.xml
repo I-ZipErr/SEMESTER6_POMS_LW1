@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:strokeWidth="0dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+    <TextView
+        android:id="@+id/noteText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorOnSurfaceVariant"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/notFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            app:iconTint="@color/design_default_color_on_secondary"
+            app:icon="@drawable/ic_not_favorite"
+            android:layout_gravity="right|top"
+            app:iconGravity="end"
+            android:background="@android:color/transparent"
+            android:visibility="invisible"/> <!--changes in code-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            app:iconTint="@color/design_default_color_on_secondary"
+            app:icon="@drawable/ic_favorite"
+            android:layout_gravity="right|top"
+            app:iconGravity="end"
+            android:background="@android:color/transparent"
+            android:visibility="invisible"/> <!--changes in code-->
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:id="@+id/noteName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"/>
+    <TextView
+        android:id="@+id/noteModification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="3dp"/>
+    <TextView
+        android:id="@+id/noteCreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorOnSurfaceVariant"
+        android:gravity="center"/>
+</LinearLayout>

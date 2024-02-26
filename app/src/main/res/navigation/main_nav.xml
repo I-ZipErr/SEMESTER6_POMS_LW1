@@ -11,7 +11,7 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_noteFragment"
+            android:id="@+id/HomeToNote"
             app:destination="@id/noteFragment" />
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
@@ -21,16 +21,25 @@
         android:id="@+id/noteFragment"
         android:name="com.uni.lw1.NoteFragment"
         android:label="fragment_note"
-        tools:layout="@layout/fragment_note" >
+        tools:layout="@layout/fragment_note"
+        app:defaultNavHost="true"> <!-- for system back button https://habr.com/ru/articles/416025/ -->
+
         <action
             android:id="@+id/action_noteFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment" >
+        </action>
+        <argument
+            android:name="noteInfo"
+            app:argType="com.uni.lw1.Note" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.uni.lw1.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search"
+        app:defaultNavHost="true">
+        <argument
+            android:name="note_list"/>
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
