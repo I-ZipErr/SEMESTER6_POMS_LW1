@@ -13,7 +13,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/materialToolbar"
                 android:layout_width="match_parent"
@@ -22,36 +23,35 @@
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_menu_open"
                 app:menu="@menu/note_action_menu_items">
-                <EditText
-                    android:id="@+id/note_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:fitsSystemWindows="true"
-                    android:inputType="text"
-                    android:hint="@string/note_name_hint"
-                    android:layout_marginBottom="5dp"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:orientation="vertical"
-            app:spanCount="1">
-            <EditText
-                android:id="@+id/note_text"
+            android:orientation="vertical">
+<!--            app:spanCount="1">-->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:fitsSystemWindows="true"
                 android:inputType="textMultiLine"
                 android:hint="@string/note_text_hint"
-                />
+                app:boxStrokeColor="@color/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
         </ScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

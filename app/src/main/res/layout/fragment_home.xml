@@ -24,9 +24,11 @@
             android:minHeight="?attr/actionBarSize"
             app:title="@string/home_page_title"
             android:elevation="0dp"
-            app:navigationIcon="@drawable/ic_menu_open"
-            app:menu="@menu/homepage_action_menu_items">
+            app:navigationIcon="@drawable/ic_menu_open">
         </com.google.android.material.appbar.MaterialToolbar>
+
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -38,9 +40,33 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="vertical"
         app:spanCount="2">
-
-
     </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <androidx.appcompat.widget.SearchView-->
+<!--        android:id="@+id/search_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:hint="@string/searchbar_hint"-->
+<!--        android:backgroundTint="@color/white">-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/search_recycler_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+<!--            android:orientation="vertical"-->
+<!--            app:spanCount="2">-->
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+<!--    </androidx.appcompat.widget.SearchView>-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/content_description_create"
+        app:srcCompat="@drawable/ic_create"
+        android:backgroundTint="@color/colorSurface"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

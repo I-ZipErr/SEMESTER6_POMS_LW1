@@ -6,7 +6,7 @@ plugins {
 }
 android {
     namespace = "com.uni.lw1"
-    testNamespace = "com.uni.testlw1"
+   // testNamespace = "com.uni.testlw1"
     compileSdk = 34
 
     defaultConfig {

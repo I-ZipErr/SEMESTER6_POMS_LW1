@@ -5,11 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    public static final int DB_VERSION = 6;
+    public static final int DB_VERSION = 1;
     public static final String DB_NAME = "Notes_DB";
 
     public static final String NOTE_TABLE = "note_table";
@@ -52,7 +51,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY (" + NOTE_GROUP_COLUMN + ") REFERENCES " + GROUP_TABLE + "(" + GROUP_NAME_COLUMN + "));" );
         db.execSQL("INSERT INTO " + NOTE_TABLE + " (" + NOTE_NAME_COLUMN + " , "
                 + NOTE_TEXT_COLUMN + ")" +
-                "VALUES('Abobo', 'ALASODALSDASDASDASDASDASaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');");
+                "VALUES('Abobo', 'ALASODALSDASDASDASDASDASaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');");
+        db.execSQL("INSERT INTO " + GROUP_TABLE + " (" + GROUP_NAME_COLUMN +  ")" +
+                "VALUES('Работа'),('Дом'),('Семья'),('Повседневность'),('Хобби'),('Здоровье');");
     }
 
     @Override
@@ -62,20 +63,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static void setIs_favorite(Note note){
-        db = dbOpenHelper.getWritableDatabase();
-        contentValues.put(DBOpenHelper.NOTE_FAVORITE_COLUMN, note.getIs_favoriteInt());
-        db.update(DBOpenHelper.NOTE_TABLE, contentValues, DBOpenHelper.NOTE_ID_COLUMN + " = " + note.getId(), null);
-        contentValues.clear();
-        db = dbOpenHelper.getReadableDatabase();
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+ NOTE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+ GROUP_TABLE);
+        onCreate(db);
     }
-    public static void setCurrentMod_date(Note note){ //"room" -- library for DB, 1 newer exists
-        db = dbOpenHelper.getWritableDatabase();
-        contentValues.put(DBOpenHelper.NOTE_MODIFICATION_COLUMN, note.getModification_date());
-        db.update(DBOpenHelper.NOTE_TABLE, contentValues, DBOpenHelper.NOTE_ID_COLUMN + " = " + note.getId(), null);
-        contentValues.clear();
-        db = dbOpenHelper.getReadableDatabase();
-    }
+
     private boolean SQLToBool(String sqlBool){
         if (sqlBool.equals("1"))
             return true;
@@ -83,11 +77,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public static void fill_list(){
+        NoteRecyclerAdapter.clearList();
         db = dbOpenHelper.getReadableDatabase();
         cursor = db.rawQuery("SELECT * FROM " + DBOpenHelper.NOTE_TABLE, null);
         if(cursor.moveToFirst()) {
             do {
-                RecyclerAdapter.addNote(new Note(
+                NoteRecyclerAdapter.addNote(new Note(
                         cursor.getInt(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_ID_COLUMN)),
                         cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_NAME_COLUMN)),
                         cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_TEXT_COLUMN)),
@@ -99,5 +94,42 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             }
             while (cursor.moveToNext());
         }
+    }
+
+    public static Note addNote(){
+        db = dbOpenHelper.getWritableDatabase();
+        db.execSQL("INSERT INTO " + NOTE_TABLE + " (" + NOTE_NAME_COLUMN + " , "
+                + NOTE_TEXT_COLUMN + ")" +
+                "VALUES(null, null);");
+        db = dbOpenHelper.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM " + NOTE_TABLE + " WHERE " + NOTE_ID_COLUMN +
+                "=(SELECT max(" + NOTE_ID_COLUMN + ") FROM " + NOTE_TABLE + ")", null);
+        cursor.moveToFirst();
+        return new Note(
+                cursor.getInt(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_ID_COLUMN)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_NAME_COLUMN)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_TEXT_COLUMN)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_GROUP_COLUMN)),
+                dbOpenHelper.SQLToBool(cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_FAVORITE_COLUMN))),
+                cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_CREATION_COLUMN)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DBOpenHelper.NOTE_MODIFICATION_COLUMN)));
+    }
+
+    public static void updateNote(Note note){
+        db = dbOpenHelper.getWritableDatabase();
+        contentValues.put(DBOpenHelper.NOTE_NAME_COLUMN, note.getName());
+        contentValues.put(DBOpenHelper.NOTE_TEXT_COLUMN, note.getText());
+        contentValues.put(DBOpenHelper.NOTE_GROUP_COLUMN, note.getGroup());
+        contentValues.put(DBOpenHelper.NOTE_FAVORITE_COLUMN, note.getIs_favoriteInt());
+        contentValues.put(DBOpenHelper.NOTE_MODIFICATION_COLUMN, note.getModification_date());
+        //creation date and ID will never change
+        db.update(DBOpenHelper.NOTE_TABLE, contentValues, DBOpenHelper.NOTE_ID_COLUMN + " = " + note.getId(), null);
+        contentValues.clear();
+        db = dbOpenHelper.getReadableDatabase();
+    }
+    public static void deleteNote(Note note){
+        db = dbOpenHelper.getWritableDatabase();
+        db.delete(DBOpenHelper.NOTE_TABLE, DBOpenHelper.NOTE_ID_COLUMN + " = " + note.getId(), null);
+        db = dbOpenHelper.getReadableDatabase();
     }
 }

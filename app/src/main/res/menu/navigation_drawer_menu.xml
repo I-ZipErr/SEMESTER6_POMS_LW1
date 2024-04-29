@@ -12,13 +12,13 @@
                 android:checkable="true"
                 app:showAsAction="ifRoom"/>
             <item
-                android:id="@+id/favorite_item"
+                android:id="@+id/favorite_items"
                 android:title="@string/favorite_title"
                 android:icon="@drawable/ic_favorite"
                 android:checkable="true"
                 app:showAsAction="ifRoom"/>
             <item
-                android:id="@+id/no_group_item"
+                android:id="@+id/no_group_items"
                 android:title="@string/no_group_title"
                 android:checkable="true"
                 app:showAsAction="ifRoom"
@@ -31,11 +31,42 @@
         android:title="@string/user_groups_title">
         <menu>
             <item
-                android:id="@+id/edit_group_item"
-                android:title="@string/edit_group_title"
+                android:id="@+id/group_work"
+                android:title="@string/group_work"
                 android:checkable="true"
                 app:showAsAction="ifRoom"
-                android:icon="@drawable/ic_edit"/>
+                android:icon="@drawable/ic_work"/>
+            <item
+                android:id="@+id/group_home"
+                android:title="@string/group_home"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_home"/>
+            <item
+                android:id="@+id/group_family"
+                android:title="@string/group_family"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_family"/>
+            <item
+                android:id="@+id/group_routine"
+                android:title="@string/group_routine"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_routine"/>
+            <item
+                android:id="@+id/group_hobby"
+                android:title="@string/group_hobby"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_hobby"/>
+            <item
+                android:id="@+id/group_health"
+                android:title="@string/group_health"
+                android:checkable="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/ic_health"/>
+
         </menu>
     </item>
 </menu>

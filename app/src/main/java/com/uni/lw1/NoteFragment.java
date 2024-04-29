@@ -1,26 +1,35 @@
 package com.uni.lw1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class NoteFragment extends Fragment {
 
-    private MaterialToolbar materialToolbar;
-    private Note note;
+    private static MaterialToolbar materialToolbar;
+    private static Note note;
+
+    private DialogFragment dialogFragment;
+    private TextInputEditText editText;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -32,22 +41,14 @@ public class NoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-        //note = com.uni.lw1.HomeFragmentDirections.ActionHomeFragmentToNoteFragment.fromBu
-        //bundle
-
+        note = NoteFragmentArgs.fromBundle(getArguments()).getNoteInfo();
+        dialogFragment = new NoteDialogFragment();
     }
 
-    int b = 8;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_note, container, false);
-        //sdk
-        //db reading
-        //inflation
 
     }
 
@@ -56,8 +57,6 @@ public class NoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //main activity
-        //find view by id
 
         materialToolbar = (MaterialToolbar)view.findViewById(R.id.materialToolbar);
         materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -67,26 +66,58 @@ public class NoteFragment extends Fragment {
             }
         });
 
+        editText = view.findViewById(R.id.note_text);
+
+        editText.setText(note.getText());
+
+        materialToolbar = (MaterialToolbar)view.findViewById(R.id.materialToolbar);
+        materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigateUp();
+            }
+        });
+
+        materialToolbar.setTitle(note.getName());
+        materialToolbar = (MaterialToolbar)view.findViewById(R.id.materialToolbar);
         materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.create) //switch-case since ADT 14 not working!!!
+                if(id == R.id.delete) //switch-case since ADT 14 not working!!!
                 {
-                    //Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_noteFragment);
-                } else if (id == R.id.search) {
-                    Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_searchFragment);
-                } else if (id == R.id.bin) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Вы уверены, что хотите удалить заметку " + note.getName());
+                    builder.setPositiveButton("Отмена", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    builder.setNegativeButton("Удалить", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            DBOpenHelper.deleteNote(note);
+                            NoteRecyclerAdapter.deleteNote(note);
+                            Navigation.findNavController(getView()).navigateUp();
+                        }
+                    });
+                    builder.setCancelable(true);
+                    builder.show();
 
+                } else if (id == R.id.edit) {
+                    note.setText(editText.getText().toString());
+                    NavDirections action = NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(note);
+                    Navigation.findNavController(view).navigate(action);
                 }
                 return true;
-
             }
         });
 
     }
 
+    @Override
+    public void onResume() {
 
+        super.onResume();
+    }
 
     @Override
     public void onStart() {
@@ -100,7 +131,27 @@ public class NoteFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable("note", note);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onDestroyView() {
+        //note.setName(editName.getText().toString());
+        note.setCurrentMod_date();
+        note.setText(editText.getText().toString());
+        try{
+        NoteRecyclerAdapter.updateNote(note);
+        DBOpenHelper.updateNote(note);}
+        catch (Exception e){}
         super.onDestroyView();
     }
+
+
+    public static void getNoteFromDialog(Note note){
+        NoteFragment.note = note;
+        materialToolbar.setTitle(note.getName());
+    }
+
 }

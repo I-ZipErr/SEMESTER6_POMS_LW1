@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">LW1</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_page_title">Все заметки</string>
     <string name="homepage_menu_item_search">Поиск</string>
@@ -16,7 +15,7 @@
     <string name="homepage_menu_item_create">Создать</string>
     <string name="content_description_create">Создать новую заметку</string>
     <string name="user_groups_title">Пользовательские группы</string>
-    <string name="edit_group_title">Управление группами</string>
+    <string name="group_work">Работа</string>
     <string name="favorite_note">Добавить в избранные</string>
     <string name="delete_favorite_note">Удалить из избранных</string>
     <string name="delete_note">Удалить заметку</string>
@@ -25,4 +24,16 @@
     <string name="edit_note_description">Изменить группу заметки</string>
     <string name="note_text_hint">Начните писать здесь!</string>
     <string name="note_name_hint">Безымянная заметка</string>
+    <string name="group_home">Дом</string>
+    <string name="group_family">Семья</string>
+    <string name="group_routine">Повседневность</string>
+    <string name="group_hobby">Хобби</string>
+    <string name="group_health">Здоровье</string>
+    <string name="searchbar_hint">Название или текст записки</string>
+    <string name="results_hint">Здесь появятся результаты поиска!</string>
+    <string name="rename_note_hint">Название записки</string>
+    <string name="save_note_dialog">Сохранить</string>
+    <string name="declain_note_dialog">Отмена</string>
+    <string name="category_note_hint">Группа записки</string>
+    <string name="deletion_hint">Зажмите кнопку для удаления!</string>
 </resources>

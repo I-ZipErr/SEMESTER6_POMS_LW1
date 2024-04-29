@@ -18,6 +18,15 @@ public class Note implements Parcelable {
     private String creation_date;
     private String modification_date;
 
+    public Note(){
+        this.id = 12;
+        this.name = "Aloha";
+        this.text = "HELLo wOrLD";
+        this.group = null;
+        this.is_favorite = false;
+        this.creation_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        this.modification_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    }
     public Note(int id, String name, String text, String group, boolean is_favorite, String creation_date,
                 String modification_date) {
         this.id = id;
@@ -71,6 +80,15 @@ public class Note implements Parcelable {
     }
     public String getModification_date() {
         return modification_date;
+    }
+
+    public void setAll(Note note){
+        this.name = note.getName();
+        this.text = note.getText();
+        this.group = note.getGroup();
+        this.is_favorite = note.getIs_favorite();
+        this.modification_date = note.getModification_date();
+        this.creation_date = note.getCreation_date();
     }
 
     public void setCurrentMod_date(){

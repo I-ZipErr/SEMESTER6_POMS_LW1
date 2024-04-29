@@ -27,5 +27,6 @@
         android:title="@string/delete_note"
         android:icon="@drawable/ic_bin"
         android:contentDescription="@string/delete_note_description"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        />
 </menu>

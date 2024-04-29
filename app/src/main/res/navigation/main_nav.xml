@@ -13,9 +13,6 @@
         <action
             android:id="@+id/HomeToNote"
             app:destination="@id/noteFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -31,20 +28,19 @@
         <argument
             android:name="noteInfo"
             app:argType="com.uni.lw1.Note" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.uni.lw1.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search"
-        app:defaultNavHost="true">
-        <argument
-            android:name="note_list"/>
         <action
-            android:id="@+id/action_searchFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_searchFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            android:id="@+id/action_noteFragment_to_noteDialogFragment"
+            app:destination="@id/noteDialogFragment">
+            <argument
+                android:name="noteInfo"
+                app:argType="com.uni.lw1.Note" />
+        </action>
     </fragment>
+    <dialog
+        android:id="@+id/noteDialogFragment"
+        android:name="com.uni.lw1.NoteDialogFragment"
+        android:label="fragment_note_dialog"
+        tools:layout="@layout/fragment_note_dialog">
+    </dialog>
+
 </navigation>
